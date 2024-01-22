@@ -7,6 +7,6 @@ return [
     ],
     'cache' => [
         'duration' => env('MAPBOX_CACHE_DURATION_SECONDS', 60 * 60 * 24 * 30),
-        'store'    => env('MAPBOX_MAPS_CACHE_STORE', null),
+        'store' => env('MAPBOX_MAPS_CACHE_STORE', null),
     ],
 ];

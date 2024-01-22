@@ -13,31 +13,34 @@ class MapColumn extends Column
 {
     protected string $view = 'filament-mapbox::columns.filament-mapbox-column';
 
-    protected int|Closure $height = 150;
-    protected int|Closure $width = 200;
+    protected int | Closure $height = 150;
 
-    protected int|string|Closure|null $zoom = 13;
-    protected int|string|Closure|null $bearing = 0;
-    protected int|string|Closure|null $pitch = 0;
+    protected int | Closure $width = 200;
 
-    protected bool|Closure $highDpi = false;
+    protected int | string | Closure | null $zoom = 13;
 
-    protected string|Closure|null $styleUsername = "mapbox";
-    protected string|Closure|null $styleName = "streets-v12";
+    protected int | string | Closure | null $bearing = 0;
 
-    protected array|Closure|null $overlays = [];
+    protected int | string | Closure | null $pitch = 0;
 
-    protected array|Closure $extraImgAttributes = [];
+    protected bool | Closure $highDpi = false;
 
-    protected int|Closure $ttl = 60 * 60 * 24 * 30;
+    protected string | Closure | null $styleUsername = 'mapbox';
 
+    protected string | Closure | null $styleName = 'streets-v12';
+
+    protected array | Closure | null $overlays = [];
+
+    protected array | Closure $extraImgAttributes = [];
+
+    protected int | Closure $ttl = 60 * 60 * 24 * 30;
 
     /**
      * Bearing rotates the map around its center. A number between 0 and 360, interpreted as decimal degrees. 90 rotates the map 90° clockwise, while 180 flips the map. Defaults to 0.
      *
      * @return $this
      */
-    public function highDpi(bool|Closure $highDpi = true): static
+    public function highDpi(bool | Closure $highDpi = true): static
     {
         $this->highDpi = $highDpi;
 
@@ -54,7 +57,7 @@ class MapColumn extends Column
      *
      * @return $this
      */
-    public function bearing(int|Closure $bearing): static
+    public function bearing(int | Closure $bearing): static
     {
         $this->bearing = $bearing;
 
@@ -71,7 +74,7 @@ class MapColumn extends Column
      *
      * @return $this
      */
-    public function pitch(int|Closure $pitch): static
+    public function pitch(int | Closure $pitch): static
     {
         $this->pitch = $pitch;
 
@@ -83,13 +86,12 @@ class MapColumn extends Column
         return $this->evaluate($this->pitch);
     }
 
-
     /**
      * Width of the image; a number between 1 and 1280 pixels.
      *
      * @return $this
      */
-    public function height(int|Closure $height): static
+    public function height(int | Closure $height): static
     {
         $this->height = $height;
 
@@ -106,7 +108,7 @@ class MapColumn extends Column
      *
      * @return $this
      */
-    public function width(int|Closure $width): static
+    public function width(int | Closure $width): static
     {
         $this->width = $width;
 
@@ -125,7 +127,7 @@ class MapColumn extends Column
      *
      * @return $this
      */
-    public function size(int|string|Closure $size): static
+    public function size(int | string | Closure $size): static
     {
         $this->width($size);
         $this->height($size);
@@ -140,7 +142,7 @@ class MapColumn extends Column
      *
      * @return $this
      */
-    public function zoom(Closure|int $zoom): static
+    public function zoom(Closure | int $zoom): static
     {
         $this->zoom = $zoom;
 
@@ -152,7 +154,7 @@ class MapColumn extends Column
         return $this->evaluate($this->zoom);
     }
 
-    public function ttl(Closure|int $ttl): static
+    public function ttl(Closure | int $ttl): static
     {
         $this->ttl = $ttl;
 
@@ -175,7 +177,7 @@ class MapColumn extends Column
      *
      * @return $this
      */
-    public function extraImgAttributes(array|Closure $attributes): static
+    public function extraImgAttributes(array | Closure $attributes): static
     {
         $this->extraImgAttributes = $attributes;
 
@@ -195,12 +197,11 @@ class MapColumn extends Column
     /**
      * Set MapStyle
      *
-     * @param string|Closure|null $username The username of the account to which the style belongs.
-     * @param string|Closure|null $name The ID of the style from which to create a static map.
-     *
+     * @param  string|Closure|null  $username  The username of the account to which the style belongs.
+     * @param  string|Closure|null  $name  The ID of the style from which to create a static map.
      * @return $this
      */
-    public function style(string|Closure|null $username, string|Closure|null $name): static
+    public function style(string | Closure | null $username, string | Closure | null $name): static
     {
         $this->styleUsername = $username;
         $this->styleName = $name;
@@ -223,7 +224,7 @@ class MapColumn extends Column
      *
      * @return $this
      */
-    public function overlays(array|Closure|null $overlays): static
+    public function overlays(array | Closure | null $overlays): static
     {
         $this->overlays = $overlays;
 
@@ -235,19 +236,23 @@ class MapColumn extends Column
         return $this->evaluate($this->overlays);
     }
 
-    public static function createGeoJson(array $geoJson): string {
-        return urlencode('geoJson('.json_encode($geoJson).')');
+    public static function createGeoJson(array $geoJson): string
+    {
+        return urlencode('geoJson(' . json_encode($geoJson) . ')');
     }
 
-    public static function addMarker(string|Closure $name = "pin-l", string|Closure $label = "1", string|Closure $color = "000", string|float|Closure $lon = '0.0', string|float|Closure $lat = '0.0'): string {
-        return urlencode($name.'-'.$label.'+#'.$color.'('.$lon.','.$lat.')');
+    public static function addMarker(string | Closure $name = 'pin-l', string | Closure $label = '1', string | Closure $color = '000', string | float | Closure $lon = '0.0', string | float | Closure $lat = '0.0'): string
+    {
+        return urlencode($name . '-' . $label . '+#' . $color . '(' . $lon . ',' . $lat . ')');
     }
 
-    public static function addCustomMarker(string|Closure $url, string|float|Closure $lon = '0.0', string|float|Closure $lat = '0.0'): string {
-        return urlencode('url-'.$url.'('.$lon.','.$lat.')');
+    public static function addCustomMarker(string | Closure $url, string | float | Closure $lon = '0.0', string | float | Closure $lat = '0.0'): string
+    {
+        return urlencode('url-' . $url . '(' . $lon . ',' . $lat . ')');
     }
 
-    private function processOverlays(array $overlays): string {
+    private function processOverlays(array $overlays): string
+    {
 
         return implode(',', $overlays);
     }
@@ -258,7 +263,7 @@ class MapColumn extends Column
 
         $query = [];
 
-        $baseUrl = "https://api.mapbox.com/styles/v1/";
+        $baseUrl = 'https://api.mapbox.com/styles/v1/';
 
         $baseUrl .= $this->getStyleUsername() . '/';
         $baseUrl .= $this->getStyleName() . '/';
@@ -309,9 +314,9 @@ class MapColumn extends Column
 
     public static function cacheImage($url): ?string
     {
-        $cacheKey = 'mapbox-' . hash('sha256',$url);
+        $cacheKey = 'mapbox-' . hash('sha256', $url);
 
-        if (!Cache::has($cacheKey)) {
+        if (! Cache::has($cacheKey)) {
             $map = file_get_contents($url);
 
             $store = config('filament-mapbox.cache.store', null);
@@ -350,11 +355,12 @@ class MapColumn extends Column
 
         if ($state instanceof Point) {
             return $state;
-        } else if (is_array($state)) {
+        } elseif (is_array($state)) {
             return new Point($state['lat'], $state['lng']);
         } else {
             try {
                 $stateJson = @json_decode($state, true, 512, JSON_THROW_ON_ERROR);
+
                 return new Point($stateJson['lat'], $stateJson['lng']);
             } catch (Exception $e) {
                 return new Point(0, 0);
