@@ -138,7 +138,7 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
         return [
             'zoom' => $this->getZoom(),
             'fit' => $this->getFitToBounds(),
-            'accessToken' => config('services.mapbox.keys.web_js_map_access_token'),
+            'accessToken' => config('filament-mapbox.keys.web_js_map_access_token', ''),
             'mapConfig' => [],
         ];
     }
