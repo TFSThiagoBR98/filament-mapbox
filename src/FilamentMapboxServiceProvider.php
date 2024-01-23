@@ -97,7 +97,7 @@ class FilamentMapboxServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('filament-mapbox', __DIR__ . '/../resources/dist/components/filament-mapbox.js'),
+            AlpineComponent::make('filament-mapbox-widget', __DIR__ . '/../resources/dist/components/filament-mapbox-widget.js'),
             Css::make('filament-mapbox-styles', __DIR__ . '/../resources/dist/filament-mapbox.css'),
             Js::make('filament-mapbox-scripts', __DIR__ . '/../resources/dist/filament-mapbox.js'),
         ];

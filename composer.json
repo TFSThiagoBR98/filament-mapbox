@@ -25,10 +25,10 @@
         "geocoder-php/mapbox-provider": "^1.4",
         "illuminate/contracts": "^10.0",
         "jmikola/geojson": "^1.2",
-        "matanyadaev/laravel-eloquent-spatial": "^4.0",
+        "matanyadaev/laravel-eloquent-spatial": "^3.0|^4.0",
         "psr/http-client": "^1.0",
         "spatie/laravel-package-tools": "^1.15.0",
-        "symfony/http-client": "^7.0"
+        "symfony/http-client": "^6.0|^7.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -79,6 +79,6 @@
             }
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
