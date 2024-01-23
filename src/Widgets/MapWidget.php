@@ -6,12 +6,14 @@ use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Support\Concerns\HasHeading;
 use Filament\Widgets;
 
 class MapWidget extends Widgets\Widget implements HasActions, HasForms
 {
     use InteractsWithActions;
     use InteractsWithForms;
+    use HasHeading;
     use Widgets\Concerns\CanPoll;
 
     protected ?array $cachedData = null;
@@ -86,11 +88,6 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
     protected function getZoom(): ?int
     {
         return static::$zoom ?? 8;
-    }
-
-    protected function getHeading(): ?string
-    {
-        return static::$heading;
     }
 
     protected function getMaxHeight(): ?string
