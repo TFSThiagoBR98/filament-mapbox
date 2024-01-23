@@ -15,7 +15,7 @@ trait HasAccessToken
         return $this;
     }
 
-    public function getZoom(): string | null
+    public function getZoom(): ?string
     {
         return $this->evaluate($this->accessToken);
     }

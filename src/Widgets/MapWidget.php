@@ -11,9 +11,9 @@ use Filament\Widgets;
 
 class MapWidget extends Widgets\Widget implements HasActions, HasForms
 {
+    use HasHeading;
     use InteractsWithActions;
     use InteractsWithForms;
-    use HasHeading;
     use Widgets\Concerns\CanPoll;
 
     protected ?array $cachedData = null;

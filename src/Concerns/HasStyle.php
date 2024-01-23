@@ -15,7 +15,7 @@ trait HasStyle
         return $this;
     }
 
-    public function getStyle(): string | null
+    public function getStyle(): ?string
     {
         return $this->evaluate($this->style);
     }

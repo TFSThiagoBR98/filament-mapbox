@@ -15,7 +15,7 @@ trait HasBearing
         return $this;
     }
 
-    public function getBearing(): int | null
+    public function getBearing(): ?int
     {
         return $this->evaluate($this->bearing);
     }
