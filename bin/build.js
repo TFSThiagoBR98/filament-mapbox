@@ -57,6 +57,6 @@ formComponents.forEach((component) => {
     compile({
         ...defaultOptions,
         entryPoints: [`./resources/js/${component}.js`],
-        outfile: `./resources/dist/${component}.js`,
+        outfile: `./resources/dist/components/${component}.js`,
     })
 })
