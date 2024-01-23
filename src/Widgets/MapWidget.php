@@ -55,7 +55,7 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
             'lng' => 44.2171392,
         ],
         'zoom' => 8,
-        'accessToken' => ''
+        'accessToken' => '',
     ];
 
     public function mount()
