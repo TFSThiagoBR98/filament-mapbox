@@ -4,7 +4,7 @@
     $heading     = $this->getHeading();
     $filters     = $this->getFilters();
     $icon        = $this->getIcon();
-    $collapsible = $this->getCollapsible();
+    $collapsible = $this->isCollapsible();
 @endphp
 
 <x-filament-widgets::widget>
