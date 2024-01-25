@@ -16,7 +16,7 @@ use TFSThiagoBR98\FilamentMapbox\Concerns\HasFitToBounds;
 use TFSThiagoBR98\FilamentMapbox\Concerns\HasMinMaxHeight;
 use TFSThiagoBR98\FilamentMapbox\Concerns\HasZoom;
 
-class MapWidget extends Widgets\Widget
+class MapWidget extends Widgets\Widget implements HasActions, HasForms
 {
     use CanBeCollapsed;
     use InteractsWithActions;
