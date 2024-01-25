@@ -6,7 +6,7 @@ use Closure;
 
 trait HasAccessToken
 {
-    protected string | Closure | null $zoom = null;
+    protected string | Closure | null $accessToken = null;
 
     public function accessToken(string | Closure | null $accessToken = null): static
     {
@@ -15,7 +15,7 @@ trait HasAccessToken
         return $this;
     }
 
-    public function getZoom(): ?string
+    public function getAccessToken(): string | null
     {
         return $this->evaluate($this->accessToken);
     }

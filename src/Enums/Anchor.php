@@ -2,7 +2,7 @@
 
 namespace TFSThiagoBR98\FilamentMapbox\Enums;
 
-enum MarkerAnchor: string
+enum Anchor: string
 {
     case Left = 'left';
     case Right = 'right';

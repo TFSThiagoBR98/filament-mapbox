@@ -1,4 +1,6 @@
 @php
+    use Filament\Support\Facades\FilamentView;
+
     $heading     = $this->getHeading();
     $filters     = $this->getFilters();
     $icon        = $this->getIcon();
@@ -9,12 +11,9 @@
     <x-filament::section
         class="filament-mapbox-widget"
         :icon="$icon"
+        :heading="$heading"
         :collapsible="$collapsible"
     >
-        <x-slot name="heading">
-            {{ $heading }}
-        </x-slot>
-
         @if ($filters)
             <x-slot name="headerEnd">
                 <x-filament::input.wrapper
@@ -37,20 +36,26 @@
         @endif
 
         <div
-            {!! ($pollingInterval = $this->getPollingInterval()) ? "wire:poll.{$pollingInterval}=\"updateMapData\"" : '' !!}
+            @if ($pollingInterval = $this->getPollingInterval())
+                wire:poll.{{ $pollingInterval }}="updateMapData"
+            @endif
         >
             <div
-                x-ignore
-                ax-load
+                @if (FilamentView::hasSpaMode())
+                    ax-load="visible"
+                @else
+                    ax-load
+                @endif
                 ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-mapbox-widget', 'tfsthiagobr98/filament-mapbox') }}"
+                wire:ignore
                 x-data="filamentMapboxWidget({
-                            cachedData: {{ json_encode($this->getCachedData()) }},
-                            config: {{ $this->getMapConfig() }},
+                            cachedData: @js($this->getCachedData()),
+                            config: @js($this->getMapConfig()),
                             mapEl: $refs.map,
                         })"
-                wire:ignore
+                x-ignore
                 @if ($maxHeight = $this->getMaxHeight())
-                    style=" max-height: {{ $maxHeight }}"
+                    style="max-height: {{ $maxHeight }}"
                 @endif
             >
                 <div

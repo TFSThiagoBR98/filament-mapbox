@@ -4,52 +4,52 @@ namespace TFSThiagoBR98\FilamentMapbox\Widgets;
 
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\Concerns\CanBeCollapsed;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Concerns\HasHeading;
+use Filament\Support\Concerns\HasIcon;
+use Filament\Tables\Concerns\HasFilters;
 use Filament\Widgets;
+use Livewire\Attributes\Locked;
+use TFSThiagoBR98\FilamentMapbox\Concerns\HasFitToBounds;
+use TFSThiagoBR98\FilamentMapbox\Concerns\HasMinMaxHeight;
+use TFSThiagoBR98\FilamentMapbox\Concerns\HasZoom;
 
-class MapWidget extends Widgets\Widget implements HasActions, HasForms
+class MapWidget extends Widgets\Widget
 {
-    use HasHeading;
+    use CanBeCollapsed;
     use InteractsWithActions;
     use InteractsWithForms;
+    use HasFitToBounds;
+    use HasHeading;
+    use HasIcon;
+    use HasZoom;
+    use HasMinMaxHeight;
     use Widgets\Concerns\CanPoll;
 
+    /**
+     * @var array<string, mixed> | null
+     */
     protected ?array $cachedData = null;
 
+    #[Locked]
     public string $dataChecksum;
+
+    protected ?string $mapId = null;
 
     public ?string $filter = null;
 
-    protected static ?string $heading = null;
-
-    protected static ?string $maxHeight = null;
-
-    protected static ?string $minHeight = '50vh';
-
+    /**
+     * @var array<string, mixed> | null
+     */
     protected static ?array $options = null;
-
-    protected static ?int $precision = 8;
-
-    protected static ?bool $fitToBounds = true;
-
-    protected static ?int $zoom = null;
 
     protected static array $layers = [];
 
-    protected static ?string $mapId = null;
-
     protected static ?string $markerAction = null;
 
-    protected static ?string $icon = 'heroicon-o-map';
-
-    protected static bool $collapsible = false;
-
     protected static string $view = 'filament-mapbox::widgets.filament-mapbox-widget';
-
-    public array $controls = [
-    ];
 
     protected array $mapConfig = [
         'center' => [
@@ -62,12 +62,14 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
 
     public function mount()
     {
-        $this->dataChecksum = md5('{}');
+        $this->dataChecksum = hash('sha256', '{}');
+        $this->icon('heroicon-o-map');
+        $this->minHeight('50vh');
     }
 
     protected function generateDataChecksum(): string
     {
-        return md5(json_encode($this->getCachedData()));
+        return hash('sha256', json_encode($this->getCachedData()));
     }
 
     protected function getCachedData(): array
@@ -75,39 +77,32 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
         return $this->cachedData ??= $this->getData();
     }
 
+    /**
+     * Get Data for Map Widget
+     *
+     * @return array
+     */
     protected function getData(): array
     {
         return [];
     }
 
+    /**
+     * @return array<scalar, scalar> | null
+     */
     protected function getFilters(): ?array
     {
         return null;
     }
 
-    protected function getZoom(): ?int
-    {
-        return static::$zoom ?? 8;
-    }
-
-    protected function getMaxHeight(): ?string
-    {
-        return static::$maxHeight;
-    }
-
-    protected function getMinHeight(): ?string
-    {
-        return static::$minHeight;
-    }
-
+    /**
+     * Filter Options
+     *
+     * @return array|null
+     */
     protected function getOptions(): ?array
     {
         return static::$options;
-    }
-
-    protected function getFitToBounds(): ?bool
-    {
-        return static::$fitToBounds;
     }
 
     protected function getLayers(): array
@@ -120,22 +115,13 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
         return static::$markerAction;
     }
 
-    protected function getIcon(): ?string
-    {
-        return static::$icon;
-    }
-
-    protected function getCollapsible(): bool
-    {
-        return static::$collapsible;
-    }
-
     public function getConfig(): array
     {
         return [
             'zoom' => $this->getZoom(),
             'fit' => $this->getFitToBounds(),
             'accessToken' => config('filament-mapbox.keys.web_js_map_access_token', ''),
+            'markerAction' => $this->getMarkerAction(),
             'mapConfig' => [],
         ];
     }
@@ -172,16 +158,8 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
         }
     }
 
-    public function updatedFilter(): void
+    public function rendering(): void
     {
-        $newDataChecksum = $this->generateDataChecksum();
-
-        if ($newDataChecksum !== $this->dataChecksum) {
-            $this->dataChecksum = $newDataChecksum;
-
-            $this->dispatch('filterChartData', [
-                'data' => $this->getCachedData(),
-            ])->self();
-        }
+        $this->updateMapData();
     }
 }
