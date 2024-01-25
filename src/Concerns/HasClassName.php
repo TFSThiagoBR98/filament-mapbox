@@ -15,7 +15,7 @@ trait HasClassName
         return $this;
     }
 
-    public function getClassName(): string | null
+    public function getClassName(): ?string
     {
         return $this->evaluate($this->className);
     }

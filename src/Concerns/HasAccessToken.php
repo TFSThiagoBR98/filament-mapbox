@@ -15,7 +15,7 @@ trait HasAccessToken
         return $this;
     }
 
-    public function getAccessToken(): string | null
+    public function getAccessToken(): ?string
     {
         return $this->evaluate($this->accessToken);
     }

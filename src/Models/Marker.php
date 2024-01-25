@@ -27,10 +27,10 @@ class Marker extends Component implements Arrayable
     use HasOccludedOpacity;
     use HasOffset;
     use HasPitchAlignment;
+    use HasPoint;
     use HasRotation;
     use HasRotationAlignment;
     use HasScale;
-    use HasPoint;
 
     public function toArray(): array
     {

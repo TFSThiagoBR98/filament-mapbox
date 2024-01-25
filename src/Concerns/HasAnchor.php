@@ -16,7 +16,7 @@ trait HasAnchor
         return $this;
     }
 
-    public function getAnchor(): Anchor | null
+    public function getAnchor(): ?Anchor
     {
         return $this->evaluate($this->anchor);
     }

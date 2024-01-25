@@ -16,7 +16,7 @@ trait HasOffset
         return $this;
     }
 
-    public function getOffset(): Point | null
+    public function getOffset(): ?Point
     {
         return $this->evaluate($this->offset);
     }

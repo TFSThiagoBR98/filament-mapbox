@@ -15,7 +15,7 @@ trait HasScale
         return $this;
     }
 
-    public function getScale(): int | null
+    public function getScale(): ?int
     {
         return $this->evaluate($this->scale);
     }

@@ -7,6 +7,7 @@ use Closure;
 trait HasMinMaxHeight
 {
     protected string | Closure | null $minHeight = null;
+
     protected string | Closure | null $maxHeight = null;
 
     public function minHeight(string | Closure | null $minHeight = null): static
@@ -16,7 +17,7 @@ trait HasMinMaxHeight
         return $this;
     }
 
-    public function getMinHeight(): string | null
+    public function getMinHeight(): ?string
     {
         return $this->evaluate($this->minHeight);
     }
@@ -28,7 +29,7 @@ trait HasMinMaxHeight
         return $this;
     }
 
-    public function getMaxHeight(): string | null
+    public function getMaxHeight(): ?string
     {
         return $this->evaluate($this->maxHeight);
     }

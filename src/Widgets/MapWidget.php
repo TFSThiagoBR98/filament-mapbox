@@ -10,7 +10,6 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Concerns\EvaluatesClosures;
 use Filament\Support\Concerns\HasHeading;
 use Filament\Support\Concerns\HasIcon;
-use Filament\Tables\Concerns\HasFilters;
 use Filament\Widgets;
 use Livewire\Attributes\Locked;
 use TFSThiagoBR98\FilamentMapbox\Concerns\HasFitToBounds;
@@ -21,13 +20,13 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
 {
     use CanBeCollapsed;
     use EvaluatesClosures;
-    use InteractsWithActions;
-    use InteractsWithForms;
     use HasFitToBounds;
     use HasHeading;
     use HasIcon;
-    use HasZoom;
     use HasMinMaxHeight;
+    use HasZoom;
+    use InteractsWithActions;
+    use InteractsWithForms;
     use Widgets\Concerns\CanPoll;
 
     /**
@@ -81,8 +80,6 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
 
     /**
      * Get Data for Map Widget
-     *
-     * @return array
      */
     protected function getData(): array
     {
@@ -99,8 +96,6 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
 
     /**
      * Filter Options
-     *
-     * @return array|null
      */
     protected function getOptions(): ?array
     {

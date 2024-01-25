@@ -16,7 +16,7 @@ trait HasPoint
         return $this;
     }
 
-    public function getPoint(): Point | null
+    public function getPoint(): ?Point
     {
         return $this->evaluate($this->point);
     }
