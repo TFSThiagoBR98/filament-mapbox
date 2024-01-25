@@ -7,6 +7,7 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\Concerns\CanBeCollapsed;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Support\Concerns\EvaluatesClosures;
 use Filament\Support\Concerns\HasHeading;
 use Filament\Support\Concerns\HasIcon;
 use Filament\Tables\Concerns\HasFilters;
@@ -19,6 +20,7 @@ use TFSThiagoBR98\FilamentMapbox\Concerns\HasZoom;
 class MapWidget extends Widgets\Widget implements HasActions, HasForms
 {
     use CanBeCollapsed;
+    use EvaluatesClosures;
     use InteractsWithActions;
     use InteractsWithForms;
     use HasFitToBounds;
