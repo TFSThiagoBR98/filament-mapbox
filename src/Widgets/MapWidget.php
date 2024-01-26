@@ -123,15 +123,13 @@ class MapWidget extends Widgets\Widget implements HasActions, HasForms
         ];
     }
 
-    public function getMapConfig(): string
+    public function getMapConfig(): array
     {
         $config = $this->getConfig();
 
-        return json_encode(
-            array_merge(
-                $this->mapConfig,
-                $config,
-            )
+        return array_merge(
+            $this->mapConfig,
+            $config,
         );
     }
 
