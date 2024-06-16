@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace TFSThiagoBR98\FilamentMapbox;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class FilamentMapboxPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'filament-mapbox';
     }
 
     public function register(Panel $panel): void

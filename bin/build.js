@@ -46,5 +46,17 @@ const defaultOptions = {
 compile({
     ...defaultOptions,
     entryPoints: ['./resources/js/index.js'],
-    outfile: './resources/dist/skeleton.js',
+    outfile: './resources/dist/filament-mapbox.js',
+})
+
+const formComponents = [
+    'filament-mapbox-widget',
+]
+
+formComponents.forEach((component) => {
+    compile({
+        ...defaultOptions,
+        entryPoints: [`./resources/js/${component}.js`],
+        outfile: `./resources/dist/components/${component}.js`,
+    })
 })
